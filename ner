@@ -1,0 +1,230 @@
+
+
+Connection Settings for: net
+
+$HOME/.m2/settings.xml
+
+In order for your Maven Client to authenticate with CloudRepo, you’ll need to add your credentials a <server> entry to the settings.xml file, usually located in the $HOME/.m2 directory.
+
+Authentication is required to read and write to/from private repository URLs.
+
+A template settings.xml for you to use is below:
+
+Note: Replace your username and password with the placeholders.
+
+<settings>
+  <servers>
+    <server>
+      <!-- id is a unique identifier for a single repository.-->
+      <id>io.cloudrepo</id>
+      <!-- Email Address of the Repository User (Account Owner Credentials WILL NOT WORK). -->
+      <username>repository-user-email-address</username>
+      <!-- Password of the Repository User. -->
+      <password>repository-user-password</password>
+    </server>
+  </servers>
+</settings>
+
+pom.xml
+Overview
+
+All Maven projects use a Project Object Model (POM) file to specify the location of the repositories to read and write artifacts to/from.
+
+Configuration of the POM file for downloading artifacts is distinct from publishing artifacts. Examples for both are specified below.
+Retrieving Artifacts from CloudRepo (Authenticated Access)
+
+Repositories specified in the <repositories> block define the repositories that Maven will use to retrieve artifacts.
+
+The following example shows how to retrieve artifacts via authenticated (private) access.
+
+Add the following to your pom.xml file:
+
+<project>
+  <!-- ...  -->
+  <!-- Other Project Configuration (dependencies, etc.)-->
+  <!-- ...  -->
+  <repositories>
+    <repository>
+      <!--
+      The username and password are retrieved by looking for the Repository
+      Id in the $HOME/.m2/settings.xml file.
+      -->
+      <!-- id Must Match the Unique Identifier in settings.xml -->
+      <id>io.cloudrepo</id>
+      <url>https://net.mycloudrepo.io/repositories/net</url>
+      <releases/>
+    </repository>
+  </repositories>
+</project>
+
+After the repository has been configured, Maven will retrieve your artifacts stored in CloudRepo as part of its build process.
+
+One way to trigger a maven build is to execute the following command in the same directory as your POM file:
+
+mvn install
+
+Publishing Artifacts to CloudRepo
+
+Repositories listed in the <distributionManagement> section of the POM file define the repositories that Maven will use to publish artifacts.
+
+Add the following to your pom.xml file:
+
+<project>
+  <!-- All your other configuration -->
+  <distributionManagement>
+    <repository>
+      <id>io.cloudrepo</id> <!-- Must Match the Unique Identifier in settings.xml -->
+      <name>My First Cloud Repo Repository</name>
+      <url>https://net.mycloudrepo.io/repositories/net</url>
+    </repository>
+  </distributionManagement>
+</project>
+
+After your distribution repository has been properly configured, you can publish artifacts to CloudRepo with the following command:
+
+mvn deplo
+ysettings.xmlpom.xmlhttps://net.mycloudrepo.io/repositories/net2016-2024<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.samsungxr</groupId>
+  <artifactId>MixedReality</artifactId>
+  <version>5.0.0</version>
+  <packaging>aar</packaging>
+  <name>SamsungXR SDK</name>
+  <description>The SamsungXR SDK(SXR) is an Open Source XR rendering library for application development on XR-supported Android devices</description>
+  <url>https://github.com/sxrsdk/sxrsdk</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>samsung</id>
+      <name>Samsung</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git@github.com:sxrsdk/sxrsdk.git</connection>
+    <developerConnection>scm:git@github.com:sxrsdk/sxrsdk.git</developerConnection>
+    <url>https://github.com/sxrsdk/sxrsdk</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.joml</groupId>
+      <artifactId>joml-android</artifactId>
+      <version>1.9.3-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.ar</groupId>
+      <artifactId>core</artifactId>
+      <version>1.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android.support</groupId>
+      <artifactId>support-v4</artifactId>
+      <version>27.0.2</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
+
+© 2016-2024 CloudRepo
+http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsdhttps://github.com/sxrsdk/sxrsdkhttp://www.w3.org/2001/XMLSchema-instancehttp://www.apache.org/licenses/LICENSE-2.0.txtgit@github.comcom.google.arcom.android.supportpkg:maven/com.azure/azure-mixedreality-remoterendering@1.1.41'com.samsungxr:MixedReality:jar:5.0.0'<dependency>
+    <groupId>com.azure</groupId>
+    <artifactId>azure-mixedreality-remoterendering</artifactId>
+    <version>1.1.41</version>
+</dependency>
+
+Connection Settings for: net
+
+$HOME/.m2/settings.xml
+
+In order for your Maven Client to authenticate with CloudRepo, you’ll need to add your credentials a <server> entry to the settings.xml file, usually located in the $HOME/.m2 directory.
+
+Authentication is required to read and write to/from private repository URLs.
+
+A template settings.xml for you to use is below:
+
+Note: Replace your username and password with the placeholders.
+
+<settings>
+  <servers>
+    <server>
+      <!-- id is a unique identifier for a single repository.-->
+      <id>io.cloudrepo</id>
+      <!-- Email Address of the Repository User (Account Owner Credentials WILL NOT WORK). -->
+      <username>repository-user-email-address</username>
+      <!-- Password of the Repository User. -->
+      <password>repository-user-password</password>
+    </server>
+  </servers>
+</settings>
+
+pom.xml
+Overview
+
+All Maven projects use a Project Object Model (POM) file to specify the location of the repositories to read and write artifacts to/from.
+
+Configuration of the POM file for downloading artifacts is distinct from publishing artifacts. Examples for both are specified below.
+Retrieving Artifacts from CloudRepo (Authenticated Access)
+
+Repositories specified in the <repositories> block define the repositories that Maven will use to retrieve artifacts.
+
+The following example shows how to retrieve artifacts via authenticated (private) access.
+
+Add the following to your pom.xml file:
+
+<project>
+  <!-- ...  -->
+  <!-- Other Project Configuration (dependencies, etc.)-->
+  <!-- ...  -->
+  <repositories>
+    <repository>
+      <!--
+      The username and password are retrieved by looking for the Repository
+      Id in the $HOME/.m2/settings.xml file.
+      -->
+      <!-- id Must Match the Unique Identifier in settings.xml -->
+      <id>io.cloudrepo</id>
+      <url>https://net.mycloudrepo.io/repositories/net</url>
+      <releases/>
+    </repository>
+  </repositories>
+</project>
+
+After the repository has been configured, Maven will retrieve your artifacts stored in CloudRepo as part of its build process.
+
+One way to trigger a maven build is to execute the following command in the same directory as your POM file:
+
+mvn install
+
+Publishing Artifacts to CloudRepo
+
+Repositories listed in the <distributionManagement> section of the POM file define the repositories that Maven will use to publish artifacts.
+
+Add the following to your pom.xml file:
+
+<project>
+  <!-- All your other configuration -->
+  <distributionManagement>
+    <repository>
+      <id>io.cloudrepo</id> <!-- Must Match the Unique Identifier in settings.xml -->
+      <name>My First Cloud Repo Repository</name>
+      <url>https://net.mycloudrepo.io/repositories/net</url>
+    </repository>
+  </distributionManagement>
+</project>
+
+After your distribution repository has been properly configured, you can publish artifacts to CloudRepo with the following command:
+
+mvn deploy
+runC
+
+
+© 2016-2024 CloudRepo
